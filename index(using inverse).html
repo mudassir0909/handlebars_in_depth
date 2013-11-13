@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Using inverse</title>
+    <script src="handlebars.js"></script>
+  </head>
+
+  <body>
+    <script id="template" type="template/handlebars">
+      {{#notifications notes}}
+        <div>{{title}}</div>
+      {{else}}
+        <div style="color:red">
+          <b>{{title}}</b>
+        </div>
+      {{/notifications}}
+    </script>
+
+    <script>
+      Handlebars.registerHelper("notifications", function(items, options){
+        console.log(items instanceof Array);
+        var output = "<ul>", item;
+        for(var i=0; i<items.length; i++){
+          item = items[i];
+          if(item.important){
+            output += "<li>"+options.inverse({title: item.title})+"</li>";
+          }else{
+            output += "<li>"+options.fn({title: item.title})+"</li>";
+          }
+        }
+        output += "</ul>";
+        return output;
+      });
+
+      var list = [{title: "Hi I look black because I'm normal", important: false},
+                  {title: "Hi, I'm red because I'm important !", important: true}];
+      var src = document.getElementById("template").innerHTML;
+      var template = Handlebars.compile(src);
+      document.body.innerHTML += template({notes: list});
+    </script>
+  </body>
+</html>

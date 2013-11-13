@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Handlebars Quickstart</title>
+    <script src="handlebars.js"></script>
+  </head>
+  <body>
+    <script>
+      var src = "<h1>Hello {{name}}</h1>";
+      var template = Handlebars.compile(src); /*  
+                                                  returns a function to which we can pass data
+                                                  which in turn returns the formatted string as 
+                                                  per the specified data
+                                              */ 
+      var output = template({name: "Mudassir"}); // => <h1>Hello Mudassir</h1>
+      document.body.innerHTML += output;
+    </script>
+  </body>
+</html>

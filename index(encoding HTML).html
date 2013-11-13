@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Encoding HTML</title>
+    <script src="handlebars.js"></script>
+  </head>
+
+  <body>
+    <script id="template" type="template/handlebars">
+      {{encoded_html}} <br>
+      {{{unencoded_html}}}
+    </script>
+    <script>
+      var src = document.getElementById("template").innerHTML;
+      var template = Handlebars.compile(src);
+      var output = template({encoded_html: "<b>I'm not bold because I'm encoded by handlebars",
+                             unencoded_html: "<b>I'm bold because you used triple curly braces like this {{{}}}"});
+      document.body.innerHTML += output;
+    </script>
+  </body>
+</html>

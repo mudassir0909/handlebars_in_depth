@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Using fn</title>
+    <script src="handlebars.js"></script>
+  </head>
+
+  <body>
+    <script id="template" type="template/handlebars">
+      {{#dropdownList}}
+        Pick Me !
+        No Pick Me !!
+        You are being racist ! Pick me !!!
+      {{/dropdownList}}
+    </script>
+
+    <script>
+      Handlebars.registerHelper("dropdownList", function(options){
+        var list = options.fn();
+        var items = list.trim().split("\n");
+        var output = "<select>", item;
+        for(var i=0; i < items.length; i++){
+          item = items[i];
+          output += "<option value='"+item+"'>"+item+"</option>"; 
+        }
+        output += "</select>";
+        return output;
+      })
+
+      var src = document.getElementById("template").innerHTML;
+      var template = Handlebars.compile(src);
+      var output = template();
+      document.body.innerHTML += output;
+    </script>
+  </body>
+</html>

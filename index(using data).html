@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Using Data</title>
+    <script src="handlebars.js"></script>
+  </head>
+  <body>
+    <script id="template" type="template/handlebars">
+      {{greeting}}
+    </script>
+    <script>
+      Handlebars.registerHelper("greeting", function(options){
+        switch(options.data.language){
+          case "en":
+            return "Welcome"
+          case "de":
+            return "Willkommen"
+          case "hy":
+            return "Welcome Chicha !"
+          case "mu":
+            return "Welcome Mamu !"
+          default:
+            return "Welcome"
+        }
+      })
+
+      var src = document.getElementById("template").innerHTML;
+      var template = Handlebars.compile(src);
+      var output = template({}, {data: {language: 'hy'}});
+      document.body.innerHTML += output;
+    </script>
+  </body>
+</html>

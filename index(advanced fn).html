@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Advanced fn</title>
+    <script src="handlebars.js"></script>
+  </head>
+
+  <body>
+    <script id="template" type="template/handlebars">
+      {{#pow "8"}}
+        8<sup>{{index}}</sup> = {{value}}
+      {{/pow}}
+    </script>
+
+    <script>
+      Handlebars.registerHelper("pow", function(input, options){
+        var number = Number(input);
+        var output = "<ul>", item;
+        for(var i=1; i<=10; i++){
+          item = options.fn({index: i, value: Math.pow(input, i)});
+          output += "<li>"+item+"</li>";
+        }
+        return output;
+      });
+
+      var src = document.getElementById("template").innerHTML;
+      var template = Handlebars.compile(src);
+      document.body.innerHTML += template();
+    </script>
+  </body>
+</html>

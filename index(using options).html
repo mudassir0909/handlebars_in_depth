@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Using Options</title>
+    <script src="handlebars.js"></script>
+  </head>
+
+  <body>
+    <script id="template" type="template/handlebars">
+      {{caps "Hello"}}
+      {{caps "Hello" lower="no"}}
+      {{caps "Hello" lower="yes"}}
+    </script>
+    
+    <script>
+      Handlebars.registerHelper("caps", function(text, options){
+        if(!options.hash.lower || options.hash.lower == "no"){
+          return text.toUpperCase();
+        }else{
+          return text.toLowerCase();
+        }
+      })
+      var src = document.getElementById("template").innerHTML;
+      var template = Handlebars.compile(src);
+      var output = template();
+      document.body.innerHTML += output;
+    </script>
+  </body>
+</html>
